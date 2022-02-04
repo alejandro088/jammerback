@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InstrumentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +31,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('users/accept', [MatchController::class,'accept']);
     Route::get('users/next', [MatchController::class,'next_user_randomize']);
     Route::get('users/next_preference', [MatchController::class,'next_user_preference']);
+    Route::get('instruments', [InstrumentController::class,'get']);
+    Route::post('instruments/create', [InstrumentController::class,'store']);
 });
