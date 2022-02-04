@@ -12,7 +12,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "tymon/jwt-auth": "dev-develop",
-        "fakerphp/faker": "^1.9.1",
+        "fakerphp/faker": "^1.9.1"
 
     },
     "require-dev": {
