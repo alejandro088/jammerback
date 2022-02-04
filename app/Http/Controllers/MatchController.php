@@ -14,7 +14,7 @@ class MatchController extends Controller
         MatchUsers::create([
             'user_id_to' => $user->id,
             'user_id_from' => $request->user_id,
-            'status' => null,
+            'status' => 0,
             'requested_at' => now()
         ]);
 
