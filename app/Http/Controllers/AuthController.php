@@ -75,10 +75,4 @@ class AuthController extends Controller
 
         return response()->json(['message' => 'Successfully user register', 'user' => $user], Response::HTTP_CREATED);
     }
-
-    public function get_users()
-    {
-        $users = User::all();
-        return response()->json(['user' => $users]);
-    }
 }

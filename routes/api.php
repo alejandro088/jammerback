@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +21,11 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('login', [AuthController::class,'login']);
     Route::post('logout', [AuthController::class,'logout']);
     Route::post('refresh', [AuthController::class,'refresh']);
-    Route::get('users',[AuthController::class,'get_users']);
+    Route::get('users',[UserController::class,'get_all']);
     Route::post('users/create', [AuthController::class,'store']);
     Route::get('users/me', [AuthController::class,'me']);
+    Route::get('users/{id}', [UserController::class,'get_user']);
+    Route::post('users/profile', [UserController::class,'complete_profile']);
     Route::post('users/match', [MatchController::class,'match']);
     Route::post('users/accept', [MatchController::class,'accept']);
     Route::get('users/next', [MatchController::class,'next_user_randomize']);
