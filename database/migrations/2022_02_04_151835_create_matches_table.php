@@ -21,6 +21,9 @@ class CreateMatchesTable extends Migration
             $table->timestamp('requested_at');
             $table->timestamp('replied_at')->nullable();
             $table->timestamps();
+
+            // add unique index
+            $table->unique(['user_id_to', 'user_id_from']);
         });
     }
 
