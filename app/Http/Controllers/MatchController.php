@@ -57,7 +57,7 @@ class MatchController extends Controller
     {
         $user = auth()->user();
 
-        // ger random user
+        // get random user
         $user = User::where('id', '!=', $user->id)->inRandomOrder()->first();
 
         return response()->json([
