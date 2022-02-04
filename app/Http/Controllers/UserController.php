@@ -13,7 +13,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware(
-            'auth:api', ['except' => ['get_all','get_user','complete_profile']]
+            'auth:api', ['except' => ['get_all','get_user']]
         );
     }
     public function get_all(): JsonResponse
