@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InstrumentController;
+use App\Http\Controllers\GenreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('users/next_preference', [MatchController::class,'next_user_preference']);
     Route::get('instruments', [InstrumentController::class,'get']);
     Route::post('instruments/create', [InstrumentController::class,'store']);
+    Route::get('genres', [GenreController::class,'get']);
+    Route::post('genres/create', [GenreController::class,'store']);
 });
