@@ -17,10 +17,13 @@ class CreateMatchesTable extends Migration
             $table->id();
             $table->integer('user_id_to');
             $table->integer('user_id_from');
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->timestamp('requested_at');
-            $table->timestamp('replied_at');
+            $table->timestamp('replied_at')->nullable();
             $table->timestamps();
+
+            // add unique index
+            $table->unique(['user_id_to', 'user_id_from']);
         });
     }
 

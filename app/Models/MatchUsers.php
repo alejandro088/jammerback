@@ -11,5 +11,13 @@ class MatchUsers extends Model
 
     protected $table = 'matches';
 
+    protected $fillable = [
+        'user_id_to',
+        'user_id_from',
+        'status',
+        'requested_at',
+        'replied_at',
+    ];
+
 
 }

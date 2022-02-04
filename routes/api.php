@@ -24,4 +24,5 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('users/create', [AuthController::class,'store']);
     Route::get('users/me', [AuthController::class,'me']);
     Route::post('users/match', [MatchController::class,'match']);
+    Route::post('users/accept', [MatchController::class,'accept']);
 });
