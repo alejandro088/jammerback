@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Match extends Model
+class MatchUsers extends Model
 {
     use HasFactory;
+
+    protected $table = 'matches';
+
+
 }
