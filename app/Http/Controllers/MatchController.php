@@ -20,4 +20,23 @@ class MatchController extends Controller
 
         return response()->json(['message' => 'Match request sent']);
     }
+
+    public function accept(Request $request)
+    {
+        $user = auth()->user();
+
+        $match = MatchUsers::where('user_id_from', $user->id)
+            ->where('user_id_to', $request->user_id)
+            ->first();
+
+        if (!$match) {
+            return response()->json(['message' => 'No match found'], 404);
+        }
+
+        $match->status = 1;
+        $match->replied_at = now();
+        $match->save();
+
+        return response()->json(['message' => 'Match accepted']);
+    }
 }
