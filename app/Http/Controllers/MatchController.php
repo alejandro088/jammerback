@@ -58,7 +58,7 @@ class MatchController extends Controller
         $user = auth()->user();
 
         // get random user
-        $user = User::where('id', '!=', $user->id)->inRandomOrder()->first();
+        $user = User::where('id', '!=', $user->id)->where('type', '!=', $user->type)->inRandomOrder()->first();
 
         return response()->json([
             'user' => $user
@@ -75,6 +75,7 @@ class MatchController extends Controller
         $user = User::where('id', '!=', $user->id)
             ->where('availability', $user->availability)
             ->where('long_term', $user->long_term)
+            ->where('type', '!=', $user->type)
             ->whereDoesntHave('matches', function ($query) use ($user) {
                 $query->where('user_id_to', $user->id);
             })
