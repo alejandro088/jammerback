@@ -20,8 +20,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('login', [AuthController::class,'login']);
     Route::post('logout', [AuthController::class,'logout']);
     Route::post('refresh', [AuthController::class,'refresh']);
-    Route::post('create', [AuthController::class,'store']);
-    Route::get('me', [AuthController::class,'me']);
-    Route::get('all',[AuthController::class,'get_users']);
-    Route::post('match', [MatchController::class,'match']);
+    Route::get('users',[AuthController::class,'get_users']);
+    Route::post('users/create', [AuthController::class,'store']);
+    Route::get('users/me', [AuthController::class,'me']);
+    Route::post('users/match', [MatchController::class,'match']);
 });
