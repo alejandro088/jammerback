@@ -20,6 +20,7 @@ class MatchController extends Controller
     
             return response()->json([
                 'message' => 'Match accepted',
+                'user' => User::find($request->user_id),
             ], 200);
         }
 
@@ -49,7 +50,7 @@ class MatchController extends Controller
         $match->replied_at = now();
         $match->save();
 
-        return response()->json(['message' => 'Match accepted']);
+        return response()->json(['message' => 'Match accepted', 'user' => User::find($request->user_id),]);
     }
 
     public function next_user_randomize()
