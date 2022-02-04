@@ -7,6 +7,7 @@ use App\Http\Controllers\MatchController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InstrumentController;
 use App\Http\Controllers\GenreController;
+use App\Http\Controllers\LocationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,4 +37,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('instruments/create', [InstrumentController::class,'store']);
     Route::get('genres', [GenreController::class,'get']);
     Route::post('genres/create', [GenreController::class,'store']);
+    Route::get('locations', [LocationController::class,'get']);
+    Route::post('locations/create', [LocationController::class,'store']);
 });
