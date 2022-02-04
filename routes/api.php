@@ -28,4 +28,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('users/profile', [UserController::class,'complete_profile']);
     Route::post('users/match', [MatchController::class,'match']);
     Route::post('users/accept', [MatchController::class,'accept']);
+    Route::get('users/next', [MatchController::class,'next_user_randomize']);
+    Route::get('users/next_preference', [MatchController::class,'next_user_preference']);
 });
