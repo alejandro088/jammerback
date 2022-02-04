@@ -6,13 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function __construct()
     {
         $this->middleware(
-            'auth:api', ['except' => ['login']]
+            'auth:api', ['except' => ['login','store','get_users']]
         );
     }
 
@@ -50,5 +52,34 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => 0,
         ]);
+  
+    }
+
+    public function store(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => ['required','string'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'string'],
+        ]);
+       
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        auth()->login($user);
+        return response()->json(['message' => 'Successfully user register', 'user' => $user], Response::HTTP_CREATED);
+    }
+
+    public function get_users()
+    {
+        $users = User::all();
+        return response()->json(['user' => $users]);
     }
 }
