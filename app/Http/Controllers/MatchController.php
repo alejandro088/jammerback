@@ -11,6 +11,17 @@ class MatchController extends Controller
     {
         $user = auth()->user();
 
+        if ($match = MatchUsers::where('user_id_to', $request->user_id)->where('user_id_from', $user->id)->first()) {
+
+            $match->status = 1;
+            $match->replied_at = now();
+            $match->save();
+    
+            return response()->json([
+                'message' => 'Match accepted',
+            ], 200);
+        }
+
         MatchUsers::create([
             'user_id_to' => $user->id,
             'user_id_from' => $request->user_id,
