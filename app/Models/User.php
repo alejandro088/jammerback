@@ -52,4 +52,19 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function matches()
+    {
+        return $this->hasMany(MatchUsers::class, 'user_id_from');
+    }
+
+    public function instruments()
+    {
+        return $this->belongsToMany(Instrument::class, 'instrument_user');
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'genre_user');
+    }
 }

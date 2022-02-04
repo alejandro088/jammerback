@@ -25,4 +25,6 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('users/me', [AuthController::class,'me']);
     Route::post('users/match', [MatchController::class,'match']);
     Route::post('users/accept', [MatchController::class,'accept']);
+    Route::get('users/next', [MatchController::class,'next_user_randomize']);
+    Route::get('users/next_preference', [MatchController::class,'next_user_preference']);
 });

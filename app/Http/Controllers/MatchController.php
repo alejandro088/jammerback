@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\MatchUsers;
 use Illuminate\Http\Request;
 
@@ -50,4 +51,47 @@ class MatchController extends Controller
 
         return response()->json(['message' => 'Match accepted']);
     }
+
+    public function next_user_randomize()
+    {
+        $user = auth()->user();
+
+        // ger random user
+        $user = User::where('id', '!=', $user->id)->inRandomOrder()->first();
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }
+
+    public function next_user_preference()
+    {
+        $user = auth()->user();
+
+        //dd($user->instruments);
+
+        // get user with highest preference
+        $user = User::where('id', '!=', $user->id)
+            ->where('availability', $user->availability)
+            ->where('long_term', $user->long_term)
+            ->whereDoesntHave('matches', function ($query) use ($user) {
+                $query->where('user_id_to', $user->id);
+            })
+            ->whereHas('instruments', function ($query) use ($user) {
+                if ($user->instruments->first()) {
+                    $query->where('instruments.id', $user->instruments->first()->id);
+                }
+            })
+            ->whereHas('genres', function ($query) use ($user) {
+                if ($user->genres->first()) {
+                    $query->where('genres.id', $user->genres->first()->id);
+                }
+            })
+            ->inRandomOrder()
+            ->first();
+
+        return response()->json([
+            'user' => $user
+        ]);
+    }	
 }
