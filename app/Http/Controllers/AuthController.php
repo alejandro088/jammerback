@@ -16,6 +16,11 @@ class AuthController extends Controller
         );
     }
 
+    public function me(): JsonResponse
+    {
+        return response()->json(auth()->user());
+    }
+
     public function login(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
